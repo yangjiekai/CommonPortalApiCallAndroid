@@ -110,4 +110,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void  GetCommonPortalDataResultMethod (View view) {
+
+        new Thread(new Runnable() {
+            public void run() {
+                // a potentially time consuming task
+                runOnUiThread(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void run() {
+                        try {
+
+                            result =new ApiCall().GetCommonPortalContent();
+                            setText(  helloTextView, result);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+//                        helloTextView.setText(result);
+                    }
+                });
+
+
+            }
+        }).start();
+    }
+
 }
